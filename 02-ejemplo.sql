@@ -119,7 +119,53 @@ FROM movies
 ORDER BY movie_release_year ASC
 LIMIT 1;
 
+SELECT * FROM movies 
+WHERE movie_restriction = 'PG' AND movie_title LIKE 'gu%';
+
+SELECT * FROM movies 
+WHERE movie_restriction = 'PG' AND movie_title NOT LIKE 'gu%';
+
+SELECT * FROM movies
+WHERE movie_release_year >2004;
+
+SELECT * FROM movies
+WHERE movie_release_year >2004
+ORDER BY movie_release_year ASC;
+
+SELECT * FROM movies
+WHERE movie_release_year >=2013 AND movie_release_year <=2016;
+
+SELECT * FROM movies
+WHERE movie_release_year BETWEEN 2013 AND 2016;
+
+SELECT * FROM movies
+WHERE movie_release_year IN (2013, 2016);/*IN= valores iguales a*/
+
+SELECT * FROM movies
+WHERE movie_release_year != 2016;
+
+SELECT * FROM movies
+WHERE movie_release_year <> 2016;
+
+SELECT * FROM movies
+WHERE movie_restriction = 'PG-14' OR movie_restriction = 'PG-13';
+
+/*Peliculas del 2016 y que empiezen con r*/
+SELECT * FROM movies
+WHERE movie_release_year = 2016 AND movie_title LIKE 'r%';
+
+SELECT movie_title, movie_restriction, 
+CASE 
+	WHEN movie_restriction = 'PG' THEN 'Apto para todos'
+	WHEN movie_restriction = 'PG-18' THEN 'Para mayores de 18 años'
+	WHEN movie_restriction = 'PG-13' THEN 'Para mayores de 13 años'
+	WHEN movie_restriction = 'PG-14' THEN 'Para mayores de 14 años'
+	ELSE 'Sin clasificación'
+END AS Apto
+FROM movies;
+
 /*
+
 ---------------------------------------------------------------
 */
 
